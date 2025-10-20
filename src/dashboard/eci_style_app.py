@@ -487,15 +487,18 @@ class OfficialStyleDashboard:
         
         # Realistic individual party seat projections
         party_results = [
-            {'name': 'Bharatiya Janata Party', 'code': 'BJP', 'seats': 45, 'alliance': 'NDA', 'color': '#FF9933'},
-            {'name': 'Janata Dal (United)', 'code': 'JDU', 'seats': 35, 'alliance': 'NDA', 'color': '#006400'},
-            {'name': 'Rashtriya Janata Dal', 'code': 'RJD', 'seats': 85, 'alliance': 'INDI', 'color': '#008000'},
-            {'name': 'Indian National Congress', 'code': 'INC', 'seats': 12, 'alliance': 'INDI', 'color': '#19AAED'},
-            {'name': 'Communist Party of India (ML)', 'code': 'CPI_ML', 'seats': 8, 'alliance': 'INDI', 'color': '#FF0000'},
-            {'name': 'Hindustani Awam Morcha', 'code': 'HAM', 'seats': 6, 'alliance': 'NDA', 'color': '#800080'},
-            {'name': 'Vikassheel Insaan Party', 'code': 'VIP', 'seats': 4, 'alliance': 'NDA', 'color': '#FFD700'},
-            {'name': 'All India Majlis-e-Ittehadul Muslimeen', 'code': 'AIMIM', 'seats': 3, 'alliance': 'Others', 'color': '#00FF00'},
-            {'name': 'Others/Independents', 'code': 'OTH', 'seats': 45, 'alliance': 'Others', 'color': '#808080'}
+            {'name': 'Bharatiya Janata Party', 'code': 'BJP', 'seats': 50, 'alliance': 'NDA', 'color': '#FF9933'},
+            {'name': 'Janata Dal (United)', 'code': 'JDU', 'seats': 40, 'alliance': 'NDA', 'color': '#006400'},
+            {'name': 'Rashtriya Janata Dal', 'code': 'RJD', 'seats': 95, 'alliance': 'INDI', 'color': '#008000'},
+            {'name': 'Indian National Congress', 'code': 'INC', 'seats': 15, 'alliance': 'INDI', 'color': '#19AAED'},
+            {'name': 'Communist Party of India (ML)', 'code': 'CPI_ML', 'seats': 6, 'alliance': 'INDI', 'color': '#FF0000'},
+            {'name': 'Jan Suraaj Party', 'code': 'JSP', 'seats': 12, 'alliance': 'Others', 'color': '#FF6B35'},
+            {'name': 'Hindustani Awam Morcha', 'code': 'HAM', 'seats': 5, 'alliance': 'NDA', 'color': '#800080'},
+            {'name': 'Vikassheel Insaan Party', 'code': 'VIP', 'seats': 3, 'alliance': 'NDA', 'color': '#FFD700'},
+            {'name': 'All India Majlis-e-Ittehadul Muslimeen', 'code': 'AIMIM', 'seats': 4, 'alliance': 'Others', 'color': '#00FF00'},
+            {'name': 'Bahujan Samaj Party', 'code': 'BSP', 'seats': 2, 'alliance': 'Others', 'color': '#0000FF'},
+            {'name': 'Lok Janshakti Party (Secular)', 'code': 'LJSP', 'seats': 3, 'alliance': 'Others', 'color': '#4169E1'},
+            {'name': 'Others/Independents', 'code': 'OTH', 'seats': 8, 'alliance': 'Others', 'color': '#808080'}
         ]
         
         for party in party_results:

@@ -113,6 +113,14 @@ BIHAR_PARTIES = {
         'leader': 'Arvind Kejriwal',
         'state_leader': 'Sushil Gupta'
     },
+    'JSP': {
+        'full_name': 'Jan Suraaj Party',
+        'alliance': 'Others',
+        'color': '#FF6B35',
+        'symbol': 'Torch',
+        'leader': 'Prashant Kishor',
+        'state_leader': 'Prashant Kishor'
+    },
     'NOTA': {
         'full_name': 'None of the Above',
         'alliance': 'Others',

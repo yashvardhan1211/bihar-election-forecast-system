@@ -629,17 +629,18 @@ class ForecastDashboard:
         # Realistic individual party projections (not alliance-based percentages)
         party_data = [
             # Major parties with realistic seat counts based on Bihar politics
-            {'Party': 'Bharatiya Janata Party', 'Code': 'BJP', 'Alliance': 'NDA', 'Expected Seats': 45, 'Leader': 'Sushil Kumar Modi', 'Symbol': 'Lotus', 'Color': '#FF9933'},
-            {'Party': 'Janata Dal (United)', 'Code': 'JDU', 'Alliance': 'NDA', 'Expected Seats': 35, 'Leader': 'Nitish Kumar', 'Symbol': 'Arrow', 'Color': '#138808'},
-            {'Party': 'Rashtriya Janata Dal', 'Code': 'RJD', 'Alliance': 'INDI', 'Expected Seats': 85, 'Leader': 'Tejashwi Yadav', 'Symbol': 'Lantern', 'Color': '#008000'},
-            {'Party': 'Indian National Congress', 'Code': 'INC', 'Alliance': 'INDI', 'Expected Seats': 12, 'Leader': 'Madan Mohan Jha', 'Symbol': 'Hand', 'Color': '#19AAED'},
-            {'Party': 'Communist Party of India (ML)', 'Code': 'CPI_ML', 'Alliance': 'INDI', 'Expected Seats': 8, 'Leader': 'Kunal', 'Symbol': 'Sickle', 'Color': '#FF0000'},
-            {'Party': 'Hindustani Awam Morcha', 'Code': 'HAM', 'Alliance': 'NDA', 'Expected Seats': 6, 'Leader': 'Jitan Ram Manjhi', 'Symbol': 'Pressure Cooker', 'Color': '#800080'},
-            {'Party': 'Vikassheel Insaan Party', 'Code': 'VIP', 'Alliance': 'NDA', 'Expected Seats': 4, 'Leader': 'Mukesh Sahani', 'Symbol': 'Broom', 'Color': '#FFD700'},
-            {'Party': 'All India Majlis-e-Ittehadul Muslimeen', 'Code': 'AIMIM', 'Alliance': 'Others', 'Expected Seats': 3, 'Leader': 'Akhtarul Iman', 'Symbol': 'Kite', 'Color': '#00FF00'},
+            {'Party': 'Bharatiya Janata Party', 'Code': 'BJP', 'Alliance': 'NDA', 'Expected Seats': 50, 'Leader': 'Sushil Kumar Modi', 'Symbol': 'Lotus', 'Color': '#FF9933'},
+            {'Party': 'Janata Dal (United)', 'Code': 'JDU', 'Alliance': 'NDA', 'Expected Seats': 40, 'Leader': 'Nitish Kumar', 'Symbol': 'Arrow', 'Color': '#138808'},
+            {'Party': 'Rashtriya Janata Dal', 'Code': 'RJD', 'Alliance': 'INDI', 'Expected Seats': 95, 'Leader': 'Tejashwi Yadav', 'Symbol': 'Lantern', 'Color': '#008000'},
+            {'Party': 'Indian National Congress', 'Code': 'INC', 'Alliance': 'INDI', 'Expected Seats': 15, 'Leader': 'Madan Mohan Jha', 'Symbol': 'Hand', 'Color': '#19AAED'},
+            {'Party': 'Communist Party of India (ML)', 'Code': 'CPI_ML', 'Alliance': 'INDI', 'Expected Seats': 6, 'Leader': 'Kunal', 'Symbol': 'Sickle', 'Color': '#FF0000'},
+            {'Party': 'Jan Suraaj Party', 'Code': 'JSP', 'Alliance': 'Others', 'Expected Seats': 12, 'Leader': 'Prashant Kishor', 'Symbol': 'Torch', 'Color': '#FF6B35'},
+            {'Party': 'Hindustani Awam Morcha', 'Code': 'HAM', 'Alliance': 'NDA', 'Expected Seats': 5, 'Leader': 'Jitan Ram Manjhi', 'Symbol': 'Pressure Cooker', 'Color': '#800080'},
+            {'Party': 'Vikassheel Insaan Party', 'Code': 'VIP', 'Alliance': 'NDA', 'Expected Seats': 3, 'Leader': 'Mukesh Sahani', 'Symbol': 'Broom', 'Color': '#FFD700'},
+            {'Party': 'All India Majlis-e-Ittehadul Muslimeen', 'Code': 'AIMIM', 'Alliance': 'Others', 'Expected Seats': 4, 'Leader': 'Akhtarul Iman', 'Symbol': 'Kite', 'Color': '#00FF00'},
             {'Party': 'Bahujan Samaj Party', 'Code': 'BSP', 'Alliance': 'Others', 'Expected Seats': 2, 'Leader': 'Bharat Singh', 'Symbol': 'Elephant', 'Color': '#0000FF'},
-            {'Party': 'Lok Janshakti Party (Secular)', 'Code': 'LJSP', 'Alliance': 'Others', 'Expected Seats': 2, 'Leader': 'Chirag Paswan', 'Symbol': 'Helicopter', 'Color': '#4169E1'},
-            {'Party': 'Others/Independents', 'Code': 'OTH', 'Alliance': 'Others', 'Expected Seats': 41, 'Leader': 'Various', 'Symbol': 'Various', 'Color': '#808080'}
+            {'Party': 'Lok Janshakti Party (Secular)', 'Code': 'LJSP', 'Alliance': 'Others', 'Expected Seats': 3, 'Leader': 'Chirag Paswan', 'Symbol': 'Helicopter', 'Color': '#4169E1'},
+            {'Party': 'Others/Independents', 'Code': 'OTH', 'Alliance': 'Others', 'Expected Seats': 8, 'Leader': 'Various', 'Symbol': 'Various', 'Color': '#808080'}
         ]
         
         # Display party-wise table
