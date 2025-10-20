@@ -63,22 +63,6 @@ BIHAR_PARTIES = {
         'leader': 'Dipankar Bhattacharya',
         'state_leader': 'Kunal'
     },
-    'CPI': {
-        'full_name': 'Communist Party of India',
-        'alliance': 'INDI',
-        'color': '#ED1E26',
-        'symbol': 'Ears of Corn and Sickle',
-        'leader': 'D. Raja',
-        'state_leader': 'Ramnaresh Pandey'
-    },
-    'CPM': {
-        'full_name': 'Communist Party of India (Marxist)',
-        'alliance': 'INDI',
-        'color': '#CC0000',
-        'symbol': 'Hammer, Sickle and Star',
-        'leader': 'Sitaram Yechury',
-        'state_leader': 'Awadhesh Kumar'
-    },
     
     # Other Parties
     'AIMIM': {
@@ -105,13 +89,29 @@ BIHAR_PARTIES = {
         'leader': 'Chirag Paswan',
         'state_leader': 'Chirag Paswan'
     },
-    'JSP': {
-        'full_name': 'Jan Swaraj Party',
+    'LJPRV': {
+        'full_name': 'Lok Janshakti Party (Ram Vilas)',
         'alliance': 'Others',
-        'color': '#800000',
-        'symbol': 'Whistle',
-        'leader': 'Yogendra Yadav',
-        'state_leader': 'Yogendra Yadav'
+        'color': '#FF69B4',
+        'symbol': 'Bungalow',
+        'leader': 'Pashupati Kumar Paras',
+        'state_leader': 'Pashupati Kumar Paras'
+    },
+    'RLSP': {
+        'full_name': 'Rashtriya Lok Samata Party',
+        'alliance': 'Others',
+        'color': '#FFA500',
+        'symbol': 'Ceiling Fan',
+        'leader': 'Upendra Kushwaha',
+        'state_leader': 'Upendra Kushwaha'
+    },
+    'AAP': {
+        'full_name': 'Aam Aadmi Party',
+        'alliance': 'Others',
+        'color': '#0066CC',
+        'symbol': 'Broom',
+        'leader': 'Arvind Kejriwal',
+        'state_leader': 'Sushil Gupta'
     },
     'NOTA': {
         'full_name': 'None of the Above',
@@ -125,8 +125,8 @@ BIHAR_PARTIES = {
 
 # Alliance Mappings
 NDA_PARTIES = ['BJP', 'JDU', 'HAM', 'VIP']
-INDI_PARTIES = ['RJD', 'INC', 'CPI_ML', 'CPI', 'CPM']
-OTHER_PARTIES = ['AIMIM', 'BSP', 'LJSP', 'JSP', 'NOTA']
+INDI_PARTIES = ['RJD', 'INC', 'CPI_ML']
+OTHER_PARTIES = ['AIMIM', 'BSP', 'LJSP', 'LJPRV', 'RLSP', 'AAP', 'NOTA']
 
 def get_party_alliance(party_code):
     """Get alliance for a party"""

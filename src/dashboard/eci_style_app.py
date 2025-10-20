@@ -485,15 +485,17 @@ class OfficialStyleDashboard:
         </div>
         """, unsafe_allow_html=True)
         
-        # Calculate individual party seats
+        # Realistic individual party seat projections
         party_results = [
-            {'name': 'Bharatiya Janata Party', 'code': 'BJP', 'seats': int(nda_seats * 0.55), 'alliance': 'NDA', 'color': '#FF9933'},
-            {'name': 'Janata Dal (United)', 'code': 'JDU', 'seats': int(nda_seats * 0.35), 'alliance': 'NDA', 'color': '#006400'},
-            {'name': 'Lok Janshakti Party', 'code': 'LJP', 'seats': int(nda_seats * 0.10), 'alliance': 'NDA', 'color': '#0066CC'},
-            {'name': 'Rashtriya Janata Dal', 'code': 'RJD', 'seats': int(indi_seats * 0.60), 'alliance': 'INDI', 'color': '#008000'},
-            {'name': 'Indian National Congress', 'code': 'INC', 'seats': int(indi_seats * 0.30), 'alliance': 'INDI', 'color': '#19AAED'},
-            {'name': 'Communist Party of India', 'code': 'CPI', 'seats': int(indi_seats * 0.10), 'alliance': 'INDI', 'color': '#FF0000'},
-            {'name': 'Others', 'code': 'OTH', 'seats': others_seats, 'alliance': 'Others', 'color': '#808080'}
+            {'name': 'Bharatiya Janata Party', 'code': 'BJP', 'seats': 45, 'alliance': 'NDA', 'color': '#FF9933'},
+            {'name': 'Janata Dal (United)', 'code': 'JDU', 'seats': 35, 'alliance': 'NDA', 'color': '#006400'},
+            {'name': 'Rashtriya Janata Dal', 'code': 'RJD', 'seats': 85, 'alliance': 'INDI', 'color': '#008000'},
+            {'name': 'Indian National Congress', 'code': 'INC', 'seats': 12, 'alliance': 'INDI', 'color': '#19AAED'},
+            {'name': 'Communist Party of India (ML)', 'code': 'CPI_ML', 'seats': 8, 'alliance': 'INDI', 'color': '#FF0000'},
+            {'name': 'Hindustani Awam Morcha', 'code': 'HAM', 'seats': 6, 'alliance': 'NDA', 'color': '#800080'},
+            {'name': 'Vikassheel Insaan Party', 'code': 'VIP', 'seats': 4, 'alliance': 'NDA', 'color': '#FFD700'},
+            {'name': 'All India Majlis-e-Ittehadul Muslimeen', 'code': 'AIMIM', 'seats': 3, 'alliance': 'Others', 'color': '#00FF00'},
+            {'name': 'Others/Independents', 'code': 'OTH', 'seats': 45, 'alliance': 'Others', 'color': '#808080'}
         ]
         
         for party in party_results:
