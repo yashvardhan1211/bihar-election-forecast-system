@@ -88,7 +88,7 @@ class ForecastDashboard:
             date_dirs = sorted([d for d in self.results_dir.iterdir() if d.is_dir()], reverse=True)
             
             if not date_dirs:
-                return None, None, None, None
+                return {}, pd.DataFrame(), pd.DataFrame(), {}, None
             
             latest_dir = date_dirs[0]
             
@@ -122,7 +122,7 @@ class ForecastDashboard:
             
         except Exception as e:
             st.error(f"Error loading results: {e}")
-            return None, None, None, None, None
+            return {}, pd.DataFrame(), pd.DataFrame(), {}, None
     
     def load_historical_forecasts(self, days=30):
         """Load historical forecast data"""
@@ -336,7 +336,7 @@ class ForecastDashboard:
         """Render marginal seats analysis"""
         st.header("🎯 Most Competitive Constituencies")
         
-        if marginal_df.empty:
+        if marginal_df is None or marginal_df.empty:
             st.warning("No marginal seats data available")
             return
         
@@ -387,7 +387,7 @@ class ForecastDashboard:
         
         hist_df = self.load_historical_forecasts(days=30)
         
-        if hist_df.empty:
+        if hist_df is None or hist_df.empty:
             st.warning("No historical forecast data available")
             return
         
@@ -707,7 +707,7 @@ class ForecastDashboard:
             st.metric("Decided Seats", 243 - total_competitive, delta=f"{((243-total_competitive)/243)*100:.1f}% of total")
         
         # Regional party performance
-        if not const_prob_df.empty and 'region' in const_prob_df.columns:
+        if const_prob_df is not None and not const_prob_df.empty and 'region' in const_prob_df.columns:
             st.subheader("🗺️ Regional Party Performance")
             
             regional_analysis = const_prob_df.groupby('region').agg({
@@ -792,7 +792,7 @@ class ForecastDashboard:
             st.error("Candidate data not available")
             return
         
-        if const_prob_df.empty:
+        if const_prob_df is None or const_prob_df.empty:
             st.warning("No constituency data available")
             return
         
@@ -1085,7 +1085,7 @@ class ForecastDashboard:
         try:
             summary_df = constituency_analyzer.get_all_constituencies_summary()
             
-            if not summary_df.empty:
+            if summary_df is not None and not summary_df.empty:
                 # Add filters
                 col1, col2, col3 = st.columns(3)
                 
@@ -1220,7 +1220,7 @@ class ForecastDashboard:
         st.write(f"**Showing {len(filtered_df)} constituencies**")
         
         # Constituency table
-        if not filtered_df.empty:
+        if filtered_df is not None and not filtered_df.empty:
             # Prepare display dataframe
             display_columns = ['constituency', 'region', 'nda_win_probability']
             if 'classification' in filtered_df.columns:

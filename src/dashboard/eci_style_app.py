@@ -229,7 +229,7 @@ class OfficialStyleDashboard:
             date_dirs = sorted([d for d in self.results_dir.iterdir() if d.is_dir()], reverse=True)
             
             if not date_dirs:
-                return None, None, None, None
+                return {}, pd.DataFrame(), pd.DataFrame(), None
             
             latest_dir = date_dirs[0]
             
@@ -256,7 +256,7 @@ class OfficialStyleDashboard:
             
         except Exception as e:
             st.error(f"Error loading results: {e}")
-            return None, None, None, None
+            return {}, pd.DataFrame(), pd.DataFrame(), None
     
     def render_forecast_header(self):
         """Render forecast system header"""
@@ -477,7 +477,7 @@ class OfficialStyleDashboard:
         </div>
         """, unsafe_allow_html=True)
         
-        if const_prob_df.empty:
+        if const_prob_df is None or const_prob_df.empty:
             # Generate sample constituency data
             constituencies = [
                 {'name': 'Patna Sahib', 'region': 'Patna', 'nda_prob': 0.75, 'status': 'NDA Leading'},
@@ -667,7 +667,7 @@ class OfficialStyleDashboard:
         """, unsafe_allow_html=True)
         
         # Generate sample constituency data if not available
-        if const_prob_df.empty:
+        if const_prob_df is None or const_prob_df.empty:
             # Create sample data for Bihar constituencies
             constituencies = []
             regions = ['Patna', 'Gaya', 'Muzaffarpur', 'Darbhanga', 'Bhagalpur', 'Purnia', 'Kishanganj', 'Araria']
