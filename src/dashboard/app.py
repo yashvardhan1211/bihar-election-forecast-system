@@ -5,13 +5,16 @@ import plotly.express as px
 import numpy as np
 from datetime import datetime, timedelta
 from pathlib import Path
-from src.config.settings import Config
 import json
 import sys
 import os
 
-# Add src to path for imports
+# Add src to path for imports - MUST be before src imports
 sys.path.append(str(Path(__file__).parent.parent))
+sys.path.append(str(Path(__file__).parent.parent.parent))
+
+# Now import from src
+from src.config.settings import Config
 
 # Page configuration
 st.set_page_config(
