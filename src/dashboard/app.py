@@ -214,7 +214,69 @@ class ForecastDashboard:
     def render_main_metrics(self, summary):
         """Render main forecast metrics"""
         if not summary or 'nda_projection' not in summary:
-            st.warning("No forecast data available. Please run the daily update pipeline.")
+            # Show comprehensive setup guide
+            st.markdown("""
+            <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); 
+                        padding: 2rem; border-radius: 15px; margin: 2rem 0; color: white;">
+                <h2 style="color: white; margin: 0 0 1rem 0;">🚀 Welcome to Bihar Election Forecast System</h2>
+                <p style="font-size: 1.1rem; margin: 0;">Your advanced statistical modeling system is ready! Generate real forecasts by running the data pipeline.</p>
+            </div>
+            """, unsafe_allow_html=True)
+            
+            col1, col2 = st.columns(2)
+            
+            with col1:
+                st.markdown("""
+                ### 📊 **Generate Real Forecasts**
+                
+                **Step 1: Setup Environment**
+                ```bash
+                # Copy environment template
+                cp .env.example .env
+                
+                # Add your API keys to .env file
+                NEWS_API_KEY=your_newsapi_key_here
+                ```
+                
+                **Step 2: Run Data Pipeline**
+                ```bash
+                # Generate forecasts
+                python main.py update
+                
+                # Or start automated daily updates
+                python main.py schedule
+                ```
+                """)
+            
+            with col2:
+                st.markdown("""
+                ### 🎯 **What You'll Get**
+                
+                ✅ **Real-time Data**: News sentiment, polls, trends  
+                ✅ **Monte Carlo Simulation**: 5000+ statistical runs  
+                ✅ **Constituency Analysis**: All 243 Bihar seats  
+                ✅ **Party Projections**: NDA vs INDI forecasts  
+                ✅ **Interactive Charts**: Professional visualizations  
+                ✅ **Export Tools**: CSV downloads and reports  
+                
+                ### 🔧 **System Features**
+                - Advanced NLP sentiment analysis
+                - Exponential moving averages
+                - Probability calibration
+                - Marginal seat identification
+                """)
+            
+            st.markdown("""
+            ---
+            ### 📚 **Documentation & Support**
+            
+            - **📖 Setup Guide**: Check `README.md` for detailed instructions
+            - **🔧 Configuration**: See `.env.example` for required API keys  
+            - **📊 Architecture**: Review `SYSTEM_COMPLETE.md` for technical details
+            - **🚀 Deployment**: See `DEPLOYMENT.md` for production setup
+            
+            **Once you run the pipeline, refresh this page to see your forecasts!**
+            """)
             return
         
         nda_proj = summary['nda_projection']
@@ -337,7 +399,17 @@ class ForecastDashboard:
         st.header("🎯 Most Competitive Constituencies")
         
         if marginal_df is None or marginal_df.empty:
-            st.warning("No marginal seats data available")
+            st.markdown("""
+            <div style="background: #FFF3E0; border: 2px solid #FF9800; border-radius: 10px; padding: 1.5rem; margin: 1rem 0;">
+                <h3 style="color: #E65100; margin: 0 0 1rem 0;">🎯 Marginal Seats Analysis Not Available</h3>
+                <p style="color: #BF360C; margin: 0;">
+                    Generate Monte Carlo simulations to identify the most competitive constituencies in Bihar.
+                </p>
+                <p style="color: #F57C00; margin: 0.5rem 0 0 0; font-weight: bold;">
+                    Run: <code>python main.py update</code> to create forecasts
+                </p>
+            </div>
+            """, unsafe_allow_html=True)
             return
         
         # Show top competitive seats
@@ -388,7 +460,17 @@ class ForecastDashboard:
         hist_df = self.load_historical_forecasts(days=30)
         
         if hist_df is None or hist_df.empty:
-            st.warning("No historical forecast data available")
+            st.markdown("""
+            <div style="background: #F3E5F5; border: 2px solid #9C27B0; border-radius: 10px; padding: 1.5rem; margin: 1rem 0;">
+                <h3 style="color: #6A1B9A; margin: 0 0 1rem 0;">📈 Historical Trends Not Available</h3>
+                <p style="color: #4A148C; margin: 0;">
+                    Historical forecast trends will appear after running daily updates for multiple days.
+                </p>
+                <p style="color: #7B1FA2; margin: 0.5rem 0 0 0; font-weight: bold;">
+                    Start with: <code>python main.py schedule</code> for automated daily forecasts
+                </p>
+            </div>
+            """, unsafe_allow_html=True)
             return
         
         # Prepare data
@@ -793,7 +875,17 @@ class ForecastDashboard:
             return
         
         if const_prob_df is None or const_prob_df.empty:
-            st.warning("No constituency data available")
+            st.markdown("""
+            <div style="background: #E3F2FD; border: 2px solid #2196F3; border-radius: 10px; padding: 1.5rem; margin: 1rem 0;">
+                <h3 style="color: #1565C0; margin: 0 0 1rem 0;">📊 Constituency Data Not Available</h3>
+                <p style="color: #0D47A1; margin: 0;">
+                    Run the data pipeline to generate constituency-level forecasts and detailed candidate analysis.
+                </p>
+                <p style="color: #1976D2; margin: 0.5rem 0 0 0; font-weight: bold;">
+                    Command: <code>python main.py update</code>
+                </p>
+            </div>
+            """, unsafe_allow_html=True)
             return
         
         # Enhanced Candidate Analysis Section

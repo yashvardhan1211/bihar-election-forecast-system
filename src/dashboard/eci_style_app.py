@@ -271,23 +271,73 @@ class OfficialStyleDashboard:
     def render_main_summary(self, summary):
         """Render main election summary in ECI style"""
         if not summary or 'nda_projection' not in summary:
-            # Generate sample data for display
-            summary = {
-                'nda_projection': {
-                    'mean_seats': 125,
-                    'probability_majority': 0.65,
-                    'probability_supermajority': 0.25
-                },
-                'seat_classification': {
-                    'safe_nda': 85,
-                    'likely_nda': 25,
-                    'lean_nda': 15,
-                    'toss_up': 35,
-                    'lean_indi': 20,
-                    'likely_indi': 30,
-                    'safe_indi': 28
-                }
-            }
+            # Show professional setup guide
+            st.markdown("""
+            <div class="eci-table">
+                <div class="eci-table-header">
+                    SYSTEM INITIALIZATION REQUIRED
+                </div>
+            </div>
+            """, unsafe_allow_html=True)
+            
+            st.markdown("""
+            <div style="background: #1f4e79; color: white; padding: 2rem; border-radius: 10px; margin: 1rem 0;">
+                <h2 style="color: white; margin: 0 0 1rem 0;">🏛️ Bihar Election Forecast System</h2>
+                <p style="font-size: 1.1rem; margin: 0;">Advanced Statistical Modeling & Monte Carlo Simulation Platform</p>
+            </div>
+            """, unsafe_allow_html=True)
+            
+            col1, col2 = st.columns(2)
+            
+            with col1:
+                st.markdown("""
+                ### 📊 **Initialize Forecasting System**
+                
+                **Environment Setup:**
+                ```bash
+                cp .env.example .env
+                # Add API keys to .env file
+                ```
+                
+                **Generate Forecasts:**
+                ```bash
+                python main.py update
+                ```
+                
+                **Start Automated Updates:**
+                ```bash
+                python main.py schedule
+                ```
+                """)
+            
+            with col2:
+                st.markdown("""
+                ### 🎯 **System Capabilities**
+                
+                ✅ **Real-time Data Processing**  
+                ✅ **Monte Carlo Simulation (5000+ runs)**  
+                ✅ **243 Constituency Coverage**  
+                ✅ **NLP Sentiment Analysis**  
+                ✅ **Statistical Probability Models**  
+                ✅ **Professional Reporting**  
+                
+                ### 📈 **Data Sources**
+                - News sentiment analysis
+                - Opinion polling data  
+                - Google Trends analysis
+                - Historical election data
+                """)
+            
+            st.markdown("""
+            <div class="eci-table">
+                <div class="eci-table-header">
+                    SYSTEM STATUS: AWAITING DATA PIPELINE EXECUTION
+                </div>
+            </div>
+            """, unsafe_allow_html=True)
+            
+            st.info("**Next Step:** Run `python main.py update` to generate your first forecast, then refresh this page.")
+            return
         
         nda_proj = summary['nda_projection']
         seat_class = summary.get('seat_classification', {})
