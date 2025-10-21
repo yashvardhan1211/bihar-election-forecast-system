@@ -399,10 +399,12 @@ class OfficialStyleDashboard:
             indi_seats = 116
             others_seats = 29
         else:
-            # Use realistic seat totals based on individual party projections
-            nda_seats = 98  # BJP(50) + JDU(40) + HAM(5) + VIP(3)
-            indi_seats = 116  # RJD(95) + INC(15) + CPI_ML(6)
-            others_seats = 29  # JSP(12) + AIMIM(4) + LJSP(3) + BSP(2) + Others(8)
+            # Use actual forecast data but keep realistic distribution
+            nda_proj = summary['nda_projection']
+            actual_nda = int(nda_proj['mean_seats'])
+            nda_seats = actual_nda
+            indi_seats = 243 - actual_nda - 29  # Reserve 29 for others
+            others_seats = 29
         
         st.markdown("""
         <div class="eci-table">
@@ -485,19 +487,19 @@ class OfficialStyleDashboard:
         </div>
         """, unsafe_allow_html=True)
         
-        # Realistic individual party seat projections
+        # Dynamic individual party seat projections based on actual forecast
         party_results = [
-            {'name': 'Bharatiya Janata Party', 'code': 'BJP', 'seats': 50, 'alliance': 'NDA', 'color': '#FF9933'},
-            {'name': 'Janata Dal (United)', 'code': 'JDU', 'seats': 40, 'alliance': 'NDA', 'color': '#006400'},
-            {'name': 'Rashtriya Janata Dal', 'code': 'RJD', 'seats': 95, 'alliance': 'INDI', 'color': '#008000'},
-            {'name': 'Indian National Congress', 'code': 'INC', 'seats': 15, 'alliance': 'INDI', 'color': '#19AAED'},
-            {'name': 'Communist Party of India (ML)', 'code': 'CPI_ML', 'seats': 6, 'alliance': 'INDI', 'color': '#FF0000'},
+            {'name': 'Bharatiya Janata Party', 'code': 'BJP', 'seats': int(nda_seats * 0.51), 'alliance': 'NDA', 'color': '#FF9933'},
+            {'name': 'Janata Dal (United)', 'code': 'JDU', 'seats': int(nda_seats * 0.41), 'alliance': 'NDA', 'color': '#006400'},
+            {'name': 'Hindustani Awam Morcha', 'code': 'HAM', 'seats': int(nda_seats * 0.05), 'alliance': 'NDA', 'color': '#800080'},
+            {'name': 'Vikassheel Insaan Party', 'code': 'VIP', 'seats': int(nda_seats * 0.03), 'alliance': 'NDA', 'color': '#FFD700'},
+            {'name': 'Rashtriya Janata Dal', 'code': 'RJD', 'seats': int(indi_seats * 0.82), 'alliance': 'INDI', 'color': '#008000'},
+            {'name': 'Indian National Congress', 'code': 'INC', 'seats': int(indi_seats * 0.13), 'alliance': 'INDI', 'color': '#19AAED'},
+            {'name': 'Communist Party of India (ML)', 'code': 'CPI_ML', 'seats': int(indi_seats * 0.05), 'alliance': 'INDI', 'color': '#FF0000'},
             {'name': 'Jan Suraaj Party', 'code': 'JSP', 'seats': 12, 'alliance': 'Others', 'color': '#FF6B35'},
-            {'name': 'Hindustani Awam Morcha', 'code': 'HAM', 'seats': 5, 'alliance': 'NDA', 'color': '#800080'},
-            {'name': 'Vikassheel Insaan Party', 'code': 'VIP', 'seats': 3, 'alliance': 'NDA', 'color': '#FFD700'},
             {'name': 'All India Majlis-e-Ittehadul Muslimeen', 'code': 'AIMIM', 'seats': 4, 'alliance': 'Others', 'color': '#00FF00'},
-            {'name': 'Bahujan Samaj Party', 'code': 'BSP', 'seats': 2, 'alliance': 'Others', 'color': '#0000FF'},
             {'name': 'Lok Janshakti Party (Secular)', 'code': 'LJSP', 'seats': 3, 'alliance': 'Others', 'color': '#4169E1'},
+            {'name': 'Bahujan Samaj Party', 'code': 'BSP', 'seats': 2, 'alliance': 'Others', 'color': '#0000FF'},
             {'name': 'Others/Independents', 'code': 'OTH', 'seats': 8, 'alliance': 'Others', 'color': '#808080'}
         ]
         
@@ -645,10 +647,12 @@ class OfficialStyleDashboard:
             indi_seats = 116
             others_seats = 29
         else:
-            # Use realistic seat totals based on individual party projections
-            nda_seats = 98  # BJP(50) + JDU(40) + HAM(5) + VIP(3)
-            indi_seats = 116  # RJD(95) + INC(15) + CPI_ML(6)
-            others_seats = 29  # JSP(12) + AIMIM(4) + LJSP(3) + BSP(2) + Others(8)
+            # Use actual forecast data but keep realistic distribution
+            nda_proj = summary['nda_projection']
+            actual_nda = int(nda_proj['mean_seats'])
+            nda_seats = actual_nda
+            indi_seats = 243 - actual_nda - 29  # Reserve 29 for others
+            others_seats = 29
         
         st.markdown("""
         <div class="eci-table">

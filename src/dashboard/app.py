@@ -622,24 +622,40 @@ class ForecastDashboard:
         # Individual Party Performance
         st.subheader("🎯 Individual Party Seat Projections")
         
-        # Use realistic alliance totals
-        mean_nda = 98  # BJP(50) + JDU(40) + HAM(5) + VIP(3)
-        mean_indi = 116  # RJD(95) + INC(15) + CPI_ML(6)
+        # Get actual forecast data if available
+        if summary and 'nda_projection' in summary:
+            nda_proj = summary['nda_projection']
+            actual_nda = nda_proj['mean_seats']
+            actual_indi = 243 - actual_nda
+            
+            # Use realistic distribution ratios but scale to actual totals
+            mean_nda = actual_nda
+            mean_indi = actual_indi - 29  # Reserve 29 for others
+            others_total = 29
+        else:
+            # Fallback to realistic baseline
+            mean_nda = 98
+            mean_indi = 116
+            others_total = 29
         
-        # Realistic individual party projections (not alliance-based percentages)
+        # Dynamic party projections based on actual forecast but with realistic ratios
         party_data = [
-            # Major parties with realistic seat counts based on Bihar politics
-            {'Party': 'Bharatiya Janata Party', 'Code': 'BJP', 'Alliance': 'NDA', 'Expected Seats': 50, 'Leader': 'Sushil Kumar Modi', 'Symbol': 'Lotus', 'Color': '#FF9933'},
-            {'Party': 'Janata Dal (United)', 'Code': 'JDU', 'Alliance': 'NDA', 'Expected Seats': 40, 'Leader': 'Nitish Kumar', 'Symbol': 'Arrow', 'Color': '#138808'},
-            {'Party': 'Rashtriya Janata Dal', 'Code': 'RJD', 'Alliance': 'INDI', 'Expected Seats': 95, 'Leader': 'Tejashwi Yadav', 'Symbol': 'Lantern', 'Color': '#008000'},
-            {'Party': 'Indian National Congress', 'Code': 'INC', 'Alliance': 'INDI', 'Expected Seats': 15, 'Leader': 'Madan Mohan Jha', 'Symbol': 'Hand', 'Color': '#19AAED'},
-            {'Party': 'Communist Party of India (ML)', 'Code': 'CPI_ML', 'Alliance': 'INDI', 'Expected Seats': 6, 'Leader': 'Kunal', 'Symbol': 'Sickle', 'Color': '#FF0000'},
+            # NDA parties with realistic distribution
+            {'Party': 'Bharatiya Janata Party', 'Code': 'BJP', 'Alliance': 'NDA', 'Expected Seats': int(mean_nda * 0.51), 'Leader': 'Sushil Kumar Modi', 'Symbol': 'Lotus', 'Color': '#FF9933'},
+            {'Party': 'Janata Dal (United)', 'Code': 'JDU', 'Alliance': 'NDA', 'Expected Seats': int(mean_nda * 0.41), 'Leader': 'Nitish Kumar', 'Symbol': 'Arrow', 'Color': '#138808'},
+            {'Party': 'Hindustani Awam Morcha', 'Code': 'HAM', 'Alliance': 'NDA', 'Expected Seats': int(mean_nda * 0.05), 'Leader': 'Jitan Ram Manjhi', 'Symbol': 'Pressure Cooker', 'Color': '#800080'},
+            {'Party': 'Vikassheel Insaan Party', 'Code': 'VIP', 'Alliance': 'NDA', 'Expected Seats': int(mean_nda * 0.03), 'Leader': 'Mukesh Sahani', 'Symbol': 'Broom', 'Color': '#FFD700'},
+            
+            # INDI parties with realistic distribution  
+            {'Party': 'Rashtriya Janata Dal', 'Code': 'RJD', 'Alliance': 'INDI', 'Expected Seats': int(mean_indi * 0.82), 'Leader': 'Tejashwi Yadav', 'Symbol': 'Lantern', 'Color': '#008000'},
+            {'Party': 'Indian National Congress', 'Code': 'INC', 'Alliance': 'INDI', 'Expected Seats': int(mean_indi * 0.13), 'Leader': 'Madan Mohan Jha', 'Symbol': 'Hand', 'Color': '#19AAED'},
+            {'Party': 'Communist Party of India (ML)', 'Code': 'CPI_ML', 'Alliance': 'INDI', 'Expected Seats': int(mean_indi * 0.05), 'Leader': 'Kunal', 'Symbol': 'Sickle', 'Color': '#FF0000'},
+            
+            # Others with fixed realistic numbers (these don't scale much)
             {'Party': 'Jan Suraaj Party', 'Code': 'JSP', 'Alliance': 'Others', 'Expected Seats': 12, 'Leader': 'Prashant Kishor', 'Symbol': 'Torch', 'Color': '#FF6B35'},
-            {'Party': 'Hindustani Awam Morcha', 'Code': 'HAM', 'Alliance': 'NDA', 'Expected Seats': 5, 'Leader': 'Jitan Ram Manjhi', 'Symbol': 'Pressure Cooker', 'Color': '#800080'},
-            {'Party': 'Vikassheel Insaan Party', 'Code': 'VIP', 'Alliance': 'NDA', 'Expected Seats': 3, 'Leader': 'Mukesh Sahani', 'Symbol': 'Broom', 'Color': '#FFD700'},
             {'Party': 'All India Majlis-e-Ittehadul Muslimeen', 'Code': 'AIMIM', 'Alliance': 'Others', 'Expected Seats': 4, 'Leader': 'Akhtarul Iman', 'Symbol': 'Kite', 'Color': '#00FF00'},
-            {'Party': 'Bahujan Samaj Party', 'Code': 'BSP', 'Alliance': 'Others', 'Expected Seats': 2, 'Leader': 'Bharat Singh', 'Symbol': 'Elephant', 'Color': '#0000FF'},
             {'Party': 'Lok Janshakti Party (Secular)', 'Code': 'LJSP', 'Alliance': 'Others', 'Expected Seats': 3, 'Leader': 'Chirag Paswan', 'Symbol': 'Helicopter', 'Color': '#4169E1'},
+            {'Party': 'Bahujan Samaj Party', 'Code': 'BSP', 'Alliance': 'Others', 'Expected Seats': 2, 'Leader': 'Bharat Singh', 'Symbol': 'Elephant', 'Color': '#0000FF'},
             {'Party': 'Others/Independents', 'Code': 'OTH', 'Alliance': 'Others', 'Expected Seats': 8, 'Leader': 'Various', 'Symbol': 'Various', 'Color': '#808080'}
         ]
         
@@ -714,7 +730,7 @@ class ForecastDashboard:
         with col2:
             st.subheader("🔴 INDI Alliance Analysis")
             
-            mean_indi = 116  # Realistic INDI total
+            mean_indi = 243 - mean_nda - 29  # Dynamic INDI total (minus others)
             prob_indi_majority = 1 - prob_majority
             
             st.metric("Expected Seats", f"{mean_indi:.0f}", delta=f"{mean_indi - 122:.0f} vs majority")
