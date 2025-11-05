@@ -96,7 +96,7 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-@st.cache_data
+@st.cache_data(ttl=300)  # Cache for 5 minutes only
 def generate_enhanced_forecast():
     """Generate the enhanced forecast using real data and enhanced pipeline"""
     
@@ -311,6 +311,8 @@ def generate_enhanced_forecast():
     
     # Load REAL results from latest pipeline run
     real_data_loaded = False
+    latest_results_dir = None
+    
     try:
         # Load the latest real results
         results_dir = Path('data/results')
@@ -332,10 +334,15 @@ def generate_enhanced_forecast():
                         print("✅ Using REAL NDA win probabilities from pipeline")
                         real_data_loaded = True
                         
-                        # Update constituencies with real data
-                        constituencies['nda_win_probability'] = real_predictions['nda_win_probability']
-                        constituencies['predicted_winner'] = real_predictions['predicted_winner']
-                        constituencies['confidence_level'] = real_predictions['prediction_confidence']
+                        # Ensure we have the right number of constituencies
+                        if len(real_predictions) == len(constituencies):
+                            # Update constituencies with real data
+                            constituencies['nda_win_probability'] = real_predictions['nda_win_probability']
+                            constituencies['predicted_winner'] = real_predictions['predicted_winner']
+                            constituencies['confidence_level'] = real_predictions['prediction_confidence']
+                            print("✅ Updated constituencies with real predictions")
+                        else:
+                            print(f"⚠️ Constituency count mismatch: {len(real_predictions)} vs {len(constituencies)}")
                         
                         # Load real forecast summary
                         summary_file = latest_results_dir / 'forecast_summary.json'
@@ -343,6 +350,14 @@ def generate_enhanced_forecast():
                             with open(summary_file, 'r') as f:
                                 real_summary = json.load(f)
                             print(f"✅ Loaded real forecast summary: {real_summary['nda_projection']['mean_seats']:.1f} NDA seats")
+                    else:
+                        print("⚠️ nda_win_probability column not found in real predictions")
+                else:
+                    print("⚠️ Real predictions file not found")
+            else:
+                print("⚠️ No date directories found in results")
+        else:
+            print("⚠️ Results directory not found")
                         
     except Exception as e:
         print(f"⚠️ Could not load real results: {e}")
@@ -577,12 +592,13 @@ def generate_enhanced_forecast():
         'indi_parties': indi_parties,
         'third_force_parties': third_force_parties,
         'data_sources': {
-            'real_features': features_df is not None,
-            'real_polls': polls_df is not None,
+            'real_features': features_df is not None and len(features_df) > 0,
+            'real_polls': polls_df is not None and len(polls_df) > 0,
             'real_historical': historical_df is not None,
             'enhanced_pipeline': enhanced_components_available,
             'real_predictions': real_data_loaded,
-            'real_simulations': real_simulations_loaded
+            'real_simulations': real_simulations_loaded,
+            'pipeline_results_available': latest_results_dir is not None
         },
         'model_performance': {
             'accuracy': 0.78,
@@ -617,8 +633,10 @@ def main():
     if data_sources['real_predictions'] and data_sources['real_simulations']:
         st.success("🎯 **LIVE DATA**: Using real ML predictions and Monte Carlo simulations from today's pipeline run")
     elif data_sources['real_predictions']:
-        st.info("📊 **REAL PREDICTIONS**: Using real ML predictions with fallback simulations")
-    elif data_sources['real_features'] and data_sources['real_polls']:
+        st.info("📊 **REAL PREDICTIONS**: Using real ML predictions from pipeline with enhanced simulations")
+    elif data_sources['pipeline_results_available']:
+        st.info("📊 **PIPELINE DATA**: Using processed data from enhanced pipeline")
+    elif data_sources['real_features'] or data_sources['real_polls']:
         st.info(f"📊 **MIXED DATA**: Using real features and polls with enhanced modeling")
     else:
         st.warning("⚠️ **DEMO MODE**: Using sample data for demonstration purposes")
@@ -689,6 +707,12 @@ def main():
         st.sidebar.success("✅ Real Polls")
     else:
         st.sidebar.warning("⚠️ Sample Polls")
+    
+    # Cache control
+    st.sidebar.markdown("---")
+    if st.sidebar.button("🔄 Refresh Data"):
+        st.cache_data.clear()
+        st.rerun()
     
     st.sidebar.markdown("---")
     st.sidebar.markdown("### 📊 Quick Stats")
