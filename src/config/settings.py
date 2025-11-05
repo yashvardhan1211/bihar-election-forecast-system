@@ -16,6 +16,7 @@ class Config:
     DATA_DIR = BASE_DIR / "data"
     RAW_DATA_DIR = DATA_DIR / "raw"
     PROCESSED_DATA_DIR = DATA_DIR / "processed"
+    FEATURES_DIR = DATA_DIR / "features"
     MODELS_DIR = DATA_DIR / "models"
     RESULTS_DIR = DATA_DIR / "results"
     
@@ -74,5 +75,5 @@ class Config:
     @classmethod
     def create_directories(cls):
         """Create necessary directories if they don't exist"""
-        for dir_path in [cls.RAW_DATA_DIR, cls.PROCESSED_DATA_DIR, cls.MODELS_DIR, cls.RESULTS_DIR]:
+        for dir_path in [cls.RAW_DATA_DIR, cls.PROCESSED_DATA_DIR, cls.FEATURES_DIR, cls.MODELS_DIR, cls.RESULTS_DIR]:
             dir_path.mkdir(parents=True, exist_ok=True)
